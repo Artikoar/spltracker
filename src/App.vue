@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<div>
+		<the-nav></the-nav>
+		<main>
+			<h1>Hi!</h1>
+		</main>
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TheNav from './components/TheNav.vue';
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+	components: {
+		TheNav,
+	},
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+html {
+	font-family: 'Roboto Mono', monospace;
+}
+body {
+	background-color: #1e1e1e;
+	margin: 0;
+}
+main {
+	margin-left: 20%;
 }
 </style>
