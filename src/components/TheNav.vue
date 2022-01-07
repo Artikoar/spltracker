@@ -1,47 +1,84 @@
 <template>
-	<!-- Rights: 
-<a target="_blank" href="https://icons8.com/icon/bY5t0noHcfXn/rocket">Rocket</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
 	<div class="sidenav">
-		<!-- <div class="sidenav-content"> -->
-			<div class="sidenav-header">
-				<img src="../assets/logo.svg" alt="Logo (rocket)" />
-				Name
-			</div>
-			<div class="sidenav-links">
-				<ul>
-					<li><h2>Home</h2></li>
-					<li><h2>Calendar</h2></li>
-					<li><h2>Wiki</h2></li>
-				</ul>
-			</div>
-		<!-- </div> -->
+		<div class="logo-details">
+			<span class="logo-img">
+				<img src="../assets/bx-rocket.svg" alt="Logotype - rocket" />
+			</span>
+			<span class="logo-name">SpaceTracker</span>
+		</div>
+		<ul class="nav-links">
+			<li>
+				<router-link to="/">
+					<span class="link-icon">
+						<img src="../assets/bx-timer.svg" />
+					</span>
+					<span class="link-name">Next Launch</span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="/">
+					<span class="link-icon">
+						<img src="../assets/bx-timer.svg" />
+					</span>
+					<span class="link-name">Wiki</span>
+					<span class="link-category-expand">
+						<img src="../assets/bx-chevron-down.svg" />
+					</span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="/">
+					<span class="link-icon">
+						<img src="../assets/bx-timer.svg" />
+					</span>
+					<span class="link-name">Next Launch</span>
+				</router-link>
+			</li>
+		</ul>
 	</div>
 </template>
-
 <script>
 export default {};
 </script>
-
 <style scoped>
 .sidenav {
 	background-color: #333333;
 	position: fixed;
-	height: 100%;
-	width: 20%;
-	z-index: 1;
 	top: 0;
 	left: 0;
-	color: aliceblue;
+	height: 100%;
+	width: 240px;
+	z-index: 1;
 }
-.sidenav-header {
-	display: flex;
-	background-color: #077bca;
-	width: 100%;
-	height: 10%;
-}
-.sidenav-links {
+.sidenav .logo-details {
 	margin-top: 1rem;
+	height: 2rem;
+	width: 100%;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+}
+.sidenav .logo-img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* background: red; */
+	height: 100%;
+	min-width: 70px;
+	text-align: center;
+}
+.sidenav .logo-details img {
+	width: 30px;
+}
+.sidenav .logo-details .logo-name {
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+.sidenav .nav-links {
+	background: red;
+	height: 100%;
+	padding-top: 30px;
+}
+.sidenav .nav-links li {
+	list-style-type: none;
 }
 </style>

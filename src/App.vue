@@ -18,14 +18,17 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 html {
 	font-family: 'Roboto Mono', monospace;
+	color: aliceblue;
 }
 body {
 	background-color: #1e1e1e;
 	margin: 0;
-}
-main {
-	margin-left: 20%;
 }
 </style>
