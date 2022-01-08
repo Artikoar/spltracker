@@ -17,7 +17,7 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/">
+				<router-link to="/wiki">
 					<img src="../assets/bxl-wikipedia.svg" alt="icon" />
 					<span class="link-title">Wiki</span>
 				</router-link>
