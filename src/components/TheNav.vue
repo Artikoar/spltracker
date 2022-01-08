@@ -1,84 +1,140 @@
 <template>
 	<div class="sidenav">
-		<div class="logo-details">
-			<span class="logo-img">
-				<img src="../assets/bx-rocket.svg" alt="Logotype - rocket" />
-			</span>
-			<span class="logo-name">SpaceTracker</span>
-		</div>
 		<ul class="nav-links">
-			<li>
+			<li class="logo">
 				<router-link to="/">
-					<span class="link-icon">
-						<img src="../assets/bx-timer.svg" />
-					</span>
-					<span class="link-name">Next Launch</span>
+					<span class="link-title">STracker</span>
+					<img src="../assets/bx-rocket.svg" alt="logotype" />
 				</router-link>
 			</li>
 			<li>
 				<router-link to="/">
-					<span class="link-icon">
-						<img src="../assets/bx-timer.svg" />
-					</span>
-					<span class="link-name">Wiki</span>
-					<span class="link-category-expand">
-						<img src="../assets/bx-chevron-down.svg" />
-					</span>
+					<img src="../assets/bx-timer.svg" alt="icon" />
+					<div class="link-text">
+						<span class="link-title">Next Launch</span>
+						<span class="link-title">Countdown</span>
+					</div>
 				</router-link>
 			</li>
 			<li>
 				<router-link to="/">
-					<span class="link-icon">
-						<img src="../assets/bx-timer.svg" />
-					</span>
-					<span class="link-name">Next Launch</span>
+					<img src="../assets/bxl-wikipedia.svg" alt="icon" />
+					<span class="link-title">Wiki</span>
+				</router-link>
+			</li>
+			<li class="nav-footer">
+				<router-link to="bug">
+					<div class="link-text">
+						<span class="link-title">Found a bug?</span>
+						<span class="link-title">Click here!</span>
+					</div>
 				</router-link>
 			</li>
 		</ul>
 	</div>
 </template>
+
 <script>
 export default {};
 </script>
+
 <style scoped>
+/* style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;" */
 .sidenav {
-	background-color: #333333;
 	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 240px;
-	z-index: 1;
+	/* top: 0;	
+	left: 0; */
+	background: #333333;
+	transition: 0.2s ease;
 }
-.sidenav .logo-details {
-	margin-top: 1rem;
-	height: 2rem;
+.nav-links {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+.nav-links li {
 	width: 100%;
+}
+.nav-links a {
 	display: flex;
 	align-items: center;
+	height: 5rem;
+	color: aliceblue;
+	text-decoration: none;
+	transition: 0.2s;
+	overflow: hidden;
 }
-.sidenav .logo-img {
+.nav-links a:hover {
+	background: #222222;
+}
+.link-text {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	/* background: red; */
-	height: 100%;
-	min-width: 70px;
-	text-align: center;
+	flex-direction: column;
 }
-.sidenav .logo-details img {
-	width: 30px;
+.link-title {
+	display: none;
+	margin-left: 1rem;
+	white-space: nowrap;
 }
-.sidenav .logo-details .logo-name {
-	font-size: 1.3rem;
+.nav-links a img {
+	/* min-width: 2rem;
+	max-width: 2rem; */
+	width: 2rem;
+	margin: 0 1.5rem;
+}
+.nav-footer {
+	margin-top: auto;
+}
+.logo {
 	font-weight: 600;
+	margin-bottom: 1rem;
+	text-align: center;
+	font-size: 1.5rem;
+	background: #222222;
+	letter-spacing: 0.3ch;
+	width: 100%;
 }
-.sidenav .nav-links {
-	background: red;
-	height: 100%;
-	padding-top: 30px;
+.logo img {
+	width: 2rem;
+	transform: rotate(0);
+	transition: transform 0.6s ease;
 }
-.sidenav .nav-links li {
-	list-style-type: none;
+.sidenav:hover .logo img {
+	transform: rotate(-180deg);
+}
+
+@media screen and (max-width: 600px) {
+	.sidenav {
+		bottom: 0;
+		width: 100%;
+		height: 5rem;
+	}
+	.logo {
+		display: none;
+	}
+	.nav-links {
+		flex-direction: row;
+	}
+	.nav-links li a {
+		justify-content: center;
+	}
+}
+@media screen and (min-width: 600px) {
+	.sidenav {
+		top: 0;
+		width: 5rem;
+		height: 100%;
+	}
+	.sidenav:hover {
+		width: 15rem;
+	}
+	.sidenav:hover .link-title {
+		display: block;
+		color: aliceblue;
+	}
 }
 </style>
