@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default {
   async fetchUpcomingLaunches(context) {
+    context.commit('setLoadingState', { state: 'loading' });
     await axios
       .get(apiLinks.launches.upcoming)
       .then((response) => {
@@ -11,5 +12,6 @@ export default {
       .catch((error) => {
         throw error;
       });
+    context.commit('setLoadingState', { state: 'loaded' });
   },
 };

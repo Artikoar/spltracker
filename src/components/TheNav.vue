@@ -46,6 +46,7 @@ export default {};
 	left: 0; */
 	background: #333333;
 	transition: 0.2s ease;
+	z-index: 1;
 }
 .nav-links {
 	list-style: none;
@@ -122,12 +123,18 @@ export default {};
 	.nav-links li a {
 		justify-content: center;
 	}
+	.nav-footer {
+		display: none;
+	}
 }
 @media screen and (min-width: 600px) {
 	.sidenav {
 		top: 0;
 		width: 5rem;
 		height: 100%;
+	}
+	.nav-footer {
+		display: block;
 	}
 	.sidenav:hover {
 		width: 15rem;
