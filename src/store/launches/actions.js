@@ -1,5 +1,6 @@
 import apiLinks from '@/utils/api.js';
 import axios from 'axios';
+// import router from '@/router.js';
 
 export default {
   async fetchUpcomingLaunches(context) {
@@ -10,6 +11,8 @@ export default {
         context.commit('setUpcomingLaunches', response.data.results);
       })
       .catch((error) => {
+        context.commit('setLoadingState', { state: 'error' });
+        // router.push('/error');
         throw error;
       });
     context.commit('setLoadingState', { state: 'loaded' });

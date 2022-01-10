@@ -1,10 +1,8 @@
 <template>
-	<div>
-		<the-nav></the-nav>
-		<main>
-			<router-view></router-view>
-		</main>
-	</div>
+	<the-nav></the-nav>
+	<main>
+		<router-view></router-view>
+	</main>
 </template>
 
 <script>
