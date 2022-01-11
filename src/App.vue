@@ -42,13 +42,12 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
 	background: #666666;
 }
-main {
-	margin-left: 5rem;
+/* main {
+	
 }
 @media screen and (max-width: 600px) {
 	main {
-		margin: 0;
-		margin-bottom: 5rem;
+		
 	}
-}
+} */
 </style>

@@ -78,6 +78,8 @@ export default {};
 }
 .link-title {
 	display: none;
+	/* opacity: 0;
+	transition: opacity 0.3s ease; */
 	margin-left: 1rem;
 	white-space: nowrap;
 }
@@ -142,6 +144,7 @@ export default {};
 	}
 	.sidenav:hover .link-title {
 		display: block;
+		opacity: 1;
 		color: aliceblue;
 	}
 }

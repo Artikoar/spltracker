@@ -9,12 +9,12 @@ export default {
       .get(apiLinks.launches.upcoming)
       .then((response) => {
         context.commit('setUpcomingLaunches', response.data.results);
+        context.commit('setLoadingState', { state: 'loaded' });
       })
       .catch((error) => {
         context.commit('setLoadingState', { state: 'error' });
         // router.push('/error');
         throw error;
       });
-    context.commit('setLoadingState', { state: 'loaded' });
   },
 };
