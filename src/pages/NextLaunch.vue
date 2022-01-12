@@ -1,11 +1,15 @@
 <template>
-	<div v-if="launchesAreLoading === 'loaded'">
+	<div v-if="launchesAreLoading === 'loaded'" class="page">
 		<div class="background" :style="bgImage"></div>
 		<div class="background-dim"></div>
 		<div class="wrapper">
 			<div class="countdown">
 				<div class="rocket-name">{{ getNextLaunch.name }}</div>
-				<div class="full-date"></div>
+				<div class="full-date" v-if="nextLaunchDate">
+					{{ nextLaunchDate.getDate() }}
+					{{ months[nextLaunchDate.getMonth()] }}
+					{{ nextLaunchDate.getHours() }}:{{ nextLaunchDate.getMinutes() }}
+				</div>
 				<div class="timer">
 					<div class="time-part">
 						<span>{{ countdown.days }}</span>
@@ -61,6 +65,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import getRemainingTime from '../utils/timerCalc';
 import getZero from '../utils/getZero';
+import months from '../utils/months';
 
 export default {
 	data() {
@@ -72,11 +77,16 @@ export default {
 				minutes: 0,
 				seconds: 0,
 			},
+			months: months,
+			nextLaunchDate: null,
 			errorOccurred: false,
 		};
 	},
 	async created() {
 		await this.fetchUpcomingLaunches();
+		this.countdownInterval = setInterval(this.updateCountdown, 1000);
+		this.updateCountdown();
+		this.setNextLaunchDate();
 	},
 	methods: {
 		...mapActions('launches', ['fetchUpcomingLaunches']),
@@ -86,6 +96,9 @@ export default {
 			this.countdown.hours = getZero(countdown.hours);
 			this.countdown.minutes = getZero(countdown.minutes);
 			this.countdown.seconds = getZero(countdown.seconds);
+		},
+		setNextLaunchDate() {
+			this.nextLaunchDate = new Date(this.getNextLaunch.window_start);
 		},
 	},
 	computed: {
@@ -111,6 +124,9 @@ export default {
 </script>
 
 <style scoped>
+/* .page {
+	overflow-y: scroll;
+} */
 .background {
 	position: absolute;
 	top: 0;
@@ -163,6 +179,8 @@ export default {
 }
 .rocket-name {
 	font-size: 2rem;
+	text-align: center;
+	padding: 1rem;
 }
 .time-part {
 	font-size: 6rem;
@@ -176,7 +194,9 @@ export default {
 .time-part-title {
 	font-size: 1.15rem;
 }
-
+.full-date {
+	font-size: 1.5rem;
+}
 @media screen and (max-width: 600px) {
 	.countdown {
 		min-height: 75vh;
@@ -192,6 +212,13 @@ export default {
 	.rocket-name {
 		font-size: 0.9rem;
 	}
+	.time-part {
+		flex-basis: 50%;
+		font-size: 4rem;
+	}
+	.full-date {
+		font-size: 1rem;
+	}
 }
 @media screen and (min-width: 600px) {
 	.background,
@@ -202,8 +229,15 @@ export default {
 	.information {
 		flex-direction: row;
 	}
+	.time-part {
+		flex-basis: auto;
+		font-size: 6rem;
+	}
 	.rocket-name {
 		font-size: 2rem;
+	}
+	.full-date {
+		font-size: 1.5rem;
 	}
 }
 </style>

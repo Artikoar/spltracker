@@ -132,7 +132,7 @@ export default {};
 }
 @media screen and (min-width: 600px) {
 	.sidenav {
-		top: 0;
+		top: 0%;
 		width: 5rem;
 		height: 100%;
 	}
