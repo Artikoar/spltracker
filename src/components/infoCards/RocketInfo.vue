@@ -1,14 +1,12 @@
 <template>
   <base-card v-if="spacecraft.configuration.id && spacecraft.configuration.url">
     <template v-slot:title>Rocket</template>
-    <!-- <template v-slot:title-right>
-      <div v-if="config && config.wiki_url">
-        <a target="_blank" :href="config.wiki_url">WIKI Page</a>
-      </div>
-    </template> -->
-    <template v-slot:subtitle>{{
-      spacecraft.configuration.full_name
-    }}</template>
+    <template v-slot:subtitle v-if="config && config.wiki_url">
+      <a target="_blank" :href="config.wiki_url">{{ spacecraft.configuration.full_name }}</a>
+    </template>
+    <template v-slot:subtitle v-else>
+      {{ spacecraft.configuration.full_name }}
+    </template>
     <template v-slot:default>
       <div class="config-data" v-if="config && config.id && config.name">
         <div class="data-content">
