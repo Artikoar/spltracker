@@ -1,9 +1,10 @@
-const apiLink = 'https://ll.thespacedevs.com/2.2.0'
+const apiLink = 'https://lldev.thespacedevs.com/2.2.0';
 
 export default {
-	launches: {
-		all: `${apiLink}/launch`,
-		upcoming: `${apiLink}/launch/upcoming`,
-		launchById: id => `${apiLink}/launch/${id}`
-	}
-}
+  launches: {
+    upcomingWithKey: `/get?url=${apiLink}/launch/upcoming`,
+    upcoming: `${apiLink}/launch/upcoming`,
+    // launchById: (id) => `${apiLink}/launch/${id}`,
+  },
+  
+};

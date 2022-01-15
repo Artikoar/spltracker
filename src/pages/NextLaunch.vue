@@ -4,52 +4,13 @@
 		<div class="background-dim"></div>
 		<div class="wrapper">
 			<div class="countdown">
-				<div class="rocket-name">{{ getNextLaunch.name }}</div>
-				<div class="full-date" v-if="nextLaunchDate">
-					{{ nextLaunchDate.getDate() }}
-					{{ months[nextLaunchDate.getMonth()] }}
-					{{ nextLaunchDate.getHours() }}:{{ nextLaunchDate.getMinutes() }}
-				</div>
-				<div class="timer">
-					<div class="time-part">
-						<span>{{ countdown.days }}</span>
-						<span class="time-part-title">Days</span>
-					</div>
-					<div class="time-part">
-						<span>{{ countdown.hours }}</span>
-						<span class="time-part-title">Hours</span>
-					</div>
-					<div class="time-part">
-						<span>{{ countdown.minutes }}</span>
-						<span class="time-part-title">Minutes</span>
-					</div>
-					<div class="time-part">
-						<span>{{ countdown.seconds }}</span>
-						<span class="time-part-title">Seconds</span>
-					</div>
-				</div>
+				<countdown
+					:name="getNextLaunch.name"
+					:start="getNextLaunch.window_start"
+				></countdown>
 			</div>
 			<div class="information">
-				<base-card>
-					<template v-slot:title>Lorem</template>
-					<template v-slot:subtitle>Lorem</template>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, rem
-						illo dolores quibusdam ipsa, corrupti maiores id esse, consequatur
-						nostrum dolorem porro libero quae dicta doloribus nobis voluptas
-						facere distinctio.
-					</p>
-				</base-card>
-				<base-card>
-					<template v-slot:title>Lorem</template>
-					<template v-slot:subtitle>Lorem</template>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
-						ratione magni nobis quia exercitationem incidunt provident culpa,
-						illo assumenda accusantium inventore delectus, quasi voluptate
-						laudantium expedita voluptatum distinctio est necessitatibus.
-					</p>
-				</base-card>
+				<next-launch-info></next-launch-info>
 			</div>
 		</div>
 	</div>
@@ -63,43 +24,26 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import getRemainingTime from '../utils/timerCalc';
-import getZero from '../utils/getZero';
 import months from '../utils/months';
+import Countdown from '@/components/TheCountdown.vue';
+import NextLaunchInfo from '@/components/TheNextLaunchInfo.vue';
 
 export default {
+	components: {
+		Countdown,
+		NextLaunchInfo,
+	},
 	data() {
 		return {
-			countdownInterval: null,
-			countdown: {
-				days: 0,
-				hours: 0,
-				minutes: 0,
-				seconds: 0,
-			},
 			months: months,
-			nextLaunchDate: null,
 			errorOccurred: false,
 		};
 	},
 	async created() {
 		await this.fetchUpcomingLaunches();
-		this.countdownInterval = setInterval(this.updateCountdown, 1000);
-		this.updateCountdown();
-		this.setNextLaunchDate();
 	},
 	methods: {
 		...mapActions('launches', ['fetchUpcomingLaunches']),
-		updateCountdown() {
-			const countdown = getRemainingTime(this.getNextLaunch.window_start);
-			this.countdown.days = getZero(countdown.days);
-			this.countdown.hours = getZero(countdown.hours);
-			this.countdown.minutes = getZero(countdown.minutes);
-			this.countdown.seconds = getZero(countdown.seconds);
-		},
-		setNextLaunchDate() {
-			this.nextLaunchDate = new Date(this.getNextLaunch.window_start);
-		},
 	},
 	computed: {
 		...mapGetters('launches', ['getNextLaunch', 'launchesAreLoading']),
@@ -111,12 +55,6 @@ export default {
 		launchesAreLoading() {
 			if (this.launchesAreLoading === 'error') {
 				this.errorOccurred = true;
-			}
-			if (this.launchesAreLoading === 'loaded') {
-				if (this.getNextLaunch.window_start) {
-					this.countdownInterval = setInterval(this.updateCountdown, 1000);
-					this.updateCountdown();
-				}
 			}
 		},
 	},
@@ -161,63 +99,23 @@ export default {
 	height: 100%;
 	overflow-y: scroll;
 }
-.countdown {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+/* .countdown {
 	min-height: 60%;
+} */
+.wrapper::-webkit-scrollbar {
+	width: 0.5rem;
 }
-.information {
-	display: flex;
+.wrapper::-webkit-scrollbar-track {
+	background: rgb(48, 48, 48);
 }
-.timer {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-.rocket-name {
-	font-size: 2rem;
-	text-align: center;
-	padding: 1rem;
-}
-.time-part {
-	font-size: 6rem;
-	padding: 1rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-direction: column;
-	flex-grow: 4;
-}
-.time-part-title {
-	font-size: 1.15rem;
-}
-.full-date {
-	font-size: 1.5rem;
+.wrapper::-webkit-scrollbar-thumb {
+	background: #666666;
 }
 @media screen and (max-width: 600px) {
-	.countdown {
-		min-height: 75vh;
-	}
 	.background,
 	.background-dim,
 	.wrapper {
 		padding: 0 0rem 5rem 0rem;
-	}
-	.information {
-		flex-direction: column;
-	}
-	.rocket-name {
-		font-size: 0.9rem;
-	}
-	.time-part {
-		flex-basis: 50%;
-		font-size: 4rem;
-	}
-	.full-date {
-		font-size: 1rem;
 	}
 }
 @media screen and (min-width: 600px) {
@@ -226,18 +124,9 @@ export default {
 	.wrapper {
 		padding: 0 0rem 0rem 5rem;
 	}
-	.information {
-		flex-direction: row;
-	}
-	.time-part {
-		flex-basis: auto;
-		font-size: 6rem;
-	}
-	.rocket-name {
-		font-size: 2rem;
-	}
-	.full-date {
-		font-size: 1.5rem;
+	.info-item {
+		flex: 50%;
+		max-width: 50%;
 	}
 }
 </style>

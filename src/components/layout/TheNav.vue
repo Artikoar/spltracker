@@ -4,12 +4,12 @@
 			<li class="logo">
 				<router-link to="/">
 					<span class="link-title">STracker</span>
-					<img src="../assets/bx-rocket.svg" alt="logotype" />
+					<img src="@/assets/bx-rocket.svg" alt="logotype" />
 				</router-link>
 			</li>
 			<li>
 				<router-link to="/">
-					<img src="../assets/bx-timer.svg" alt="icon" />
+					<img src="@/assets/bx-timer.svg" alt="icon" />
 					<div class="link-text">
 						<span class="link-title">Next Launch</span>
 						<span class="link-title">Countdown</span>
@@ -18,7 +18,7 @@
 			</li>
 			<li>
 				<router-link to="/wiki">
-					<img src="../assets/bxl-wikipedia.svg" alt="icon" />
+					<img src="@/assets/bxl-wikipedia.svg" alt="icon" />
 					<span class="link-title">Wiki</span>
 				</router-link>
 			</li>
