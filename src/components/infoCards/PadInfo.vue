@@ -1,16 +1,23 @@
 <template>
-  <base-card v-if="mission && mission.id">
-    <template v-slot:title>Mission</template>
-    <template v-slot:subtitle>{{ mission.name }}</template>
+  <base-card v-if="pad && pad.id">
+    <template v-slot:title>Launchpad</template>
+    <template v-slot:subtitle>{{
+      pad.location.name ? pad.location.name : pad.name
+    }}</template>
     <template v-slot:default>
       <div class="data-content">
-        <div class="data-item">
-          <span>{{ mission.description }}</span>
-        </div>
         <table class="data-values">
           <tr>
-            <td>Type</td>
-            <td>{{ mission.type }}</td>
+            <td>Country code</td>
+            <td>{{ pad.location.country_code }}</td>
+          </tr>
+          <tr>
+            <td>Pad name</td>
+            <td>{{ pad.name }}</td>
+          </tr>
+          <tr>
+            <td>Total launches</td>
+            <td>{{ pad.total_launch_count }}</td>
           </tr>
         </table>
       </div>
@@ -20,7 +27,7 @@
 
 <script>
 export default {
-  props: ['mission'],
+  props: ['pad'],
 };
 </script>
 
