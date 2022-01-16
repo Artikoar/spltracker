@@ -1,13 +1,13 @@
 <template>
   <div class="information">
     <div class="info-item">
-      <rocket-info :spacecraft="getNextLaunch.rocket"></rocket-info>
+      <rocket-info :spacecraft="getNextLaunch.rocket" :key="getNextLaunch.rocket.id"></rocket-info>
     </div>
     <div class="info-item">
-      <mission-info :mission="getNextLaunch.mission"></mission-info>
+      <pad-info :pad="getNextLaunch.pad" :key="getNextLaunch.pad.id"></pad-info>
     </div>
-    <div class="info-item">
-      <pad-info :pad="getNextLaunch.pad"></pad-info>
+    <div class="info-item" v-if="getNextLaunch.mission">
+      <mission-info :mission="getNextLaunch.mission" :key="getNextLaunch.mission.id"></mission-info>
     </div>
   </div>
 </template>

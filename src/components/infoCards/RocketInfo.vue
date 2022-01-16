@@ -2,7 +2,12 @@
   <base-card v-if="spacecraft.configuration.id && spacecraft.configuration.url">
     <template v-slot:title>Rocket</template>
     <template v-slot:subtitle v-if="config && config.wiki_url">
-      <a target="_blank" :href="config.wiki_url">{{ spacecraft.configuration.full_name }}</a>
+      <a target="_blank" :href="config.wiki_url" class="subtitle-link">
+        <span>{{ spacecraft.configuration.full_name }}</span>
+        <span class="link-icon">
+          <img src="@/assets/link_white_24dp.svg" />
+        </span>
+      </a>
     </template>
     <template v-slot:subtitle v-else>
       {{ spacecraft.configuration.full_name }}
@@ -14,15 +19,15 @@
             <span>{{ config.description }}</span>
           </div>
           <table class="data-values">
-            <tr>
+            <tr v-if="config.launch_cost">
               <td>Launch cost</td>
-              <td>{{ config.launch_cost }}</td>
+              <td>{{ config.launch_cost }}$</td>
             </tr>
-            <tr>
+            <tr v-if="config.length">
               <td>Length</td>
               <td>{{ config.length }}m</td>
             </tr>
-            <tr>
+            <tr v-if="config.diameter">
               <td>Diameter</td>
               <td>{{ config.diameter }}m</td>
             </tr>
@@ -62,6 +67,16 @@ export default {
 </script>
 
 <style scoped>
+.subtitle-link {
+  display: flex;
+  align-items: center;
+}
+.link-icon {
+  display: inline;
+  padding-left: .3rem;
+  padding-top: .35rem;
+  /* width: 1rem; */
+}
 .data-content {
   display: flex;
   flex-direction: column;

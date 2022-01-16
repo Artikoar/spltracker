@@ -13,6 +13,7 @@
     "boxicons": "^2.1.1",
     "core-js": "^3.6.5",
     "express": "^4.17.2",
+    "mapbox-gl": "^2.6.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"

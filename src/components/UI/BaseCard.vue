@@ -52,4 +52,12 @@ export default {};
 .content {
   overflow-wrap: break-word;
 }
+a {
+  color: gray;
+  text-decoration: wavy white;
+}
+a:hover {
+  color: #cccccc;
+  text-decoration: underline solid;
+}
 </style>
