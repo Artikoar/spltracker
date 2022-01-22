@@ -82,11 +82,16 @@ export default {
       console.log('test');
       if (countdown.total <= 0) {
         clearInterval(this.countdownInterval);
+        this.countdown.days = '00';
+        this.countdown.hours = '00';
+        this.countdown.minutes = '00';
+        this.countdown.seconds = '00';
+      } else {
+        this.countdown.days = getZero(countdown.days);
+        this.countdown.hours = getZero(countdown.hours);
+        this.countdown.minutes = getZero(countdown.minutes);
+        this.countdown.seconds = getZero(countdown.seconds);
       }
-      this.countdown.days = getZero(countdown.days);
-      this.countdown.hours = getZero(countdown.hours);
-      this.countdown.minutes = getZero(countdown.minutes);
-      this.countdown.seconds = getZero(countdown.seconds);
     },
     setNextLaunchDate() {
       this.nextLaunchDate = new Date(this.start);

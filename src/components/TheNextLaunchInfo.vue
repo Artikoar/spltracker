@@ -1,13 +1,19 @@
 <template>
-  <div class="information">
-    <div class="info-item" v-if="getNextLaunch.rocket">
-      <rocket-info :spacecraft="getNextLaunch.rocket" :key="getNextLaunch.rocket.id"></rocket-info>
+  <div class="information" v-if="launch">
+    <div class="info-item" v-if="launch.rocket">
+      <rocket-info
+        :spacecraft="launch.rocket"
+        :key="launch.rocket.id"
+      ></rocket-info>
     </div>
-    <div class="info-item" v-if="getNextLaunch.pad">
-      <pad-info :pad="getNextLaunch.pad" :key="getNextLaunch.pad.id"></pad-info>
+    <div class="info-item" v-if="launch.pad">
+      <pad-info :pad="launch.pad" :key="launch.pad.id"></pad-info>
     </div>
-    <div class="info-item" v-if="getNextLaunch.mission">
-      <mission-info :mission="getNextLaunch.mission" :key="getNextLaunch.mission.id"></mission-info>
+    <div class="info-item" v-if="launch.mission">
+      <mission-info
+        :mission="launch.mission"
+        :key="launch.mission.id"
+      ></mission-info>
     </div>
   </div>
 </template>
@@ -19,6 +25,7 @@ import MissionInfo from '@/components/infoCards/MissionInfo.vue';
 import PadInfo from '@/components/infoCards/PadInfo.vue';
 
 export default {
+  props: ['launch'],
   components: {
     RocketInfo,
     MissionInfo,

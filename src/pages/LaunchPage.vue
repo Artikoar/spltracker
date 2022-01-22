@@ -4,14 +4,15 @@
     <div class="background-dim"></div>
     <div class="wrapper">
       <div class="countdown">
-        <countdown :key="getNextLaunch.id"
-          v-if="getNextLaunch"
-          :name="getNextLaunch.name"
-          :start="getNextLaunch.window_start"
+        <countdown
+          :key="launch.id"
+          v-if="launch"
+          :name="launch.name"
+          :start="launch.window_start"
         ></countdown>
       </div>
       <div class="information">
-        <next-launch-info :launch="getNextLaunch"></next-launch-info>
+        <next-launch-info :launch="launch"></next-launch-info>
       </div>
     </div>
   </div>
@@ -30,6 +31,7 @@ import Countdown from '@/components/TheCountdown.vue';
 import NextLaunchInfo from '@/components/TheNextLaunchInfo.vue';
 
 export default {
+  props: ['launchID'],
   components: {
     Countdown,
     NextLaunchInfo,
@@ -38,18 +40,26 @@ export default {
     return {
       months: months,
       errorOccurred: false,
+      launch: null,
     };
   },
   async created() {
+    if (this.launchesAreLoading === 'loaded') {
+      this.launch = this.getUpcomingLaunches.find((launch) => launch.id === this.launchID);
+    }
     await this.fetchUpcomingLaunches();
+    if (this.launchesAreLoading === 'loaded') {
+      this.launch = this.getUpcomingLaunches.find((launch) => launch.id === this.launchID);
+    }
   },
   methods: {
     ...mapActions('launches', ['fetchUpcomingLaunches']),
   },
   computed: {
-    ...mapGetters('launches', ['getNextLaunch', 'launchesAreLoading']),
+    ...mapGetters('launches', ['getUpcomingLaunches', 'launchesAreLoading']),
     bgImage() {
-      return { backgroundImage: `url(${this.getNextLaunch.image})` };
+      if (!this.launch) return;
+      return { backgroundImage: `url(${this.launch.image})` };
     },
   },
   watch: {
