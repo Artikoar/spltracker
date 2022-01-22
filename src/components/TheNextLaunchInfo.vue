@@ -1,9 +1,9 @@
 <template>
   <div class="information">
-    <div class="info-item">
+    <div class="info-item" v-if="getNextLaunch.rocket">
       <rocket-info :spacecraft="getNextLaunch.rocket" :key="getNextLaunch.rocket.id"></rocket-info>
     </div>
-    <div class="info-item">
+    <div class="info-item" v-if="getNextLaunch.pad">
       <pad-info :pad="getNextLaunch.pad" :key="getNextLaunch.pad.id"></pad-info>
     </div>
     <div class="info-item" v-if="getNextLaunch.mission">

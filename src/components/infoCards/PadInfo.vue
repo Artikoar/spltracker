@@ -90,6 +90,7 @@ export default {
         style: this.mapStyle,
         center: this.position, // starting position [lng, lat]
         zoom: 9,
+        pitchWithRotate: false
       });
       this.launchPadMarker = new mapboxgl.Marker({ color: 'red' })
         .setLngLat(this.position)
@@ -133,7 +134,7 @@ export default {
   padding: 0.3rem;
   background: #333333;
   color: aliceblue;
-  width: 49%;
+  min-width: 49%;
   border-radius: 1rem;
   display: flex;
   justify-content: space-around;
@@ -142,6 +143,7 @@ export default {
 .mpControl {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 0.5rem;
 }
@@ -157,7 +159,7 @@ export default {
   color: aliceblue;
   background-color: #333333;
   border-radius: 1rem;
-  width: 49%;
+  min-width: 49%;
   padding: 0.3rem;
   border: none;
 }
@@ -186,5 +188,14 @@ export default {
 .data-values td {
   padding-top: 0.2rem;
   padding-bottom: 0.3rem;
+}
+@media screen and (max-width: 600px) {
+  .styleChoose {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .fly-to-btn {
+    width: 100%;
+  }
 }
 </style>
