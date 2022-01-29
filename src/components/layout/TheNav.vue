@@ -17,15 +17,15 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/wiki">
-          <img src="@/assets/library_books_white_24dp.svg" alt="icon" />
-          <span class="link-title">Wiki</span>
-        </router-link>
-      </li>
-      <li>
         <router-link to="/map">
           <img src="@/assets/public_white_24dp.svg" alt="icon" />
           <span class="link-title">Map</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/wiki">
+          <img src="@/assets/library_books_white_24dp.svg" alt="icon" />
+          <span class="link-title">Wiki</span>
         </router-link>
       </li>
       <li class="nav-footer">

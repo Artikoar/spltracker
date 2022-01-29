@@ -39,13 +39,13 @@
         </div>
       </div>
       <div ref="mapBox" class="mapBox"></div>
-      <div v-if="launchesAreLoading === 'error'">
-        <h2>
-          Oops, an error occurred. Contact us on
-          <router-link to="/bug">bug report page</router-link>.
-        </h2>
-      </div>
     </div>
+  </div>
+  <div v-if="launchesAreLoading === 'error'">
+    <h2>
+      Oops, an error occurred. Contact us on
+      <router-link to="/bug">bug report page</router-link>.
+    </h2>
   </div>
 </template>
 
@@ -82,9 +82,9 @@ export default {
         });
         this.map.dragRotate.disable();
         this.map.touchZoomRotate.disableRotation();
-        this.$el.querySelector('.mapboxgl-ctrl-bottom-left').remove();
-        this.$el.querySelector('.mapboxgl-ctrl-attrib-inner').remove();
-        this.$el.querySelector('.mapboxgl-ctrl-bottom-right').remove();
+        this.$refs.mapBox.querySelector('.mapboxgl-ctrl-bottom-left').remove();
+        this.$refs.mapBox.querySelector('.mapboxgl-ctrl-attrib-inner').remove();
+        this.$refs.mapBox.querySelector('.mapboxgl-ctrl-bottom-right').remove();
         this.map.on('load', () => {
           this.initMarkers();
         });

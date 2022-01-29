@@ -1,13 +1,19 @@
 <template>
   <div class="information">
     <div class="info-item" v-if="getNextLaunch.rocket">
-      <rocket-info :spacecraft="getNextLaunch.rocket" :key="getNextLaunch.rocket.id"></rocket-info>
+      <rocket-info
+        :spacecraft="getNextLaunch.rocket"
+        :key="getNextLaunch.rocket.id"
+      ></rocket-info>
     </div>
-    <div class="info-item" v-if="getNextLaunch.pad">
+    <div class="info-item" :class="{tall: getNextLaunch.mission && getNextLaunch.rocket}" v-if="getNextLaunch.pad">
       <pad-info :pad="getNextLaunch.pad" :key="getNextLaunch.pad.id"></pad-info>
     </div>
     <div class="info-item" v-if="getNextLaunch.mission">
-      <mission-info :mission="getNextLaunch.mission" :key="getNextLaunch.mission.id"></mission-info>
+      <mission-info
+        :mission="getNextLaunch.mission"
+        :key="getNextLaunch.mission.id"
+      ></mission-info>
     </div>
   </div>
 </template>
@@ -31,23 +37,23 @@ export default {
 </script>
 
 <style scoped>
-.information {
-  display: flex;
-}
 @media screen and (max-width: 600px) {
   .information {
+    display: flex;
     flex-direction: column;
   }
 }
 @media screen and (min-width: 600px) {
   .information {
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* justify-content: stretch; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
   .info-item {
-    flex: 50%;
-    max-width: 50%;
+    /* width: 100%; */
+  }
+  .tall {
+    grid-row: 1 / 3;
+    grid-column: 2;
   }
 }
 </style>

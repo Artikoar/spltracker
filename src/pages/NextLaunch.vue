@@ -4,7 +4,8 @@
     <div class="background-dim"></div>
     <div class="wrapper">
       <div class="countdown">
-        <countdown :key="getNextLaunch.id"
+        <countdown
+          :key="getNextLaunch.id"
           v-if="getNextLaunch"
           :name="getNextLaunch.name"
           :start="getNextLaunch.window_start"
@@ -15,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div v-if="errorOccurred">
+  <div v-if="launchesAreLoading === 'error'">
     <h2>
       Oops, an error occurred. Contact us on
       <router-link to="/bug">bug report page</router-link>.
@@ -52,13 +53,7 @@ export default {
       return { backgroundImage: `url(${this.getNextLaunch.image})` };
     },
   },
-  watch: {
-    launchesAreLoading() {
-      if (this.launchesAreLoading === 'error') {
-        this.errorOccurred = true;
-      }
-    },
-  },
+  watch: {},
 };
 </script>
 
