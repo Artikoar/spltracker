@@ -93,13 +93,23 @@ export default {
     initMarkers() {
       for (let launch of this.getUpcomingLaunches) {
         if (launch.pad.longitude && launch.pad.latitude) {
-          this.setMarkerForPad(launch.pad);
+          this.setMarkerForPad(launch);
         }
       }
     },
-    setMarkerForPad(pad) {
-      this.launchPadMarker = new mapboxgl.Marker({ color: 'red' })
-        .setLngLat([pad.longitude, pad.latitude])
+    setMarkerForPad(launch) {
+      const div = document.createElement('div');
+      const h3 = document.createElement('h3');
+      h3.textContent = launch.name;
+      h3.classList.add('popup-map-class');
+      h3.addEventListener('click', () => {
+        this.$router.push(`/launch/${launch.id}`);
+      });
+      div.appendChild(h3);
+      const popup = new mapboxgl.Popup({ offset: 25 }).setDOMContent(h3);
+      new mapboxgl.Marker({ color: 'red' })
+        .setLngLat([launch.pad.longitude, launch.pad.latitude])
+        .setPopup(popup)
         .addTo(this.map);
     },
   },
@@ -123,6 +133,15 @@ export default {
 };
 </script>
 
+<style>
+.popup-map-class {
+  color: black;
+}
+.popup-map-class:hover {
+  color: rgb(160, 160, 160);
+  text-decoration: rgb(160, 160, 160) solid underline;
+}
+</style>
 <style scoped>
 .wrapper {
   position: absolute;
