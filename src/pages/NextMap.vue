@@ -91,11 +91,21 @@ export default {
       }
     },
     initMarkers() {
+      const pads = [];
       for (let launch of this.getUpcomingLaunches) {
         if (launch.pad.longitude && launch.pad.latitude) {
-          this.setMarkerForPad(launch);
+          if (
+            this.getUpcomingLaunches.filter(
+              (currentLaunch) => currentLaunch.pad.id === launch.pad.id
+            ).length > 1
+          ) {
+            pads.push(launch.pad.id);
+          } else {
+            this.setMarkerForPad(launch);
+          }
         }
       }
+      console.log(pads);
     },
     setMarkerForPad(launch) {
       const div = document.createElement('div');
@@ -140,6 +150,7 @@ export default {
 .popup-map-class:hover {
   color: rgb(160, 160, 160);
   text-decoration: rgb(160, 160, 160) solid underline;
+  cursor: pointer;
 }
 </style>
 <style scoped>

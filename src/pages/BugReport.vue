@@ -16,6 +16,7 @@
         <h3>
           Thank you for reporting a bug! We'll fix it as soon as possible.
         </h3>
+        <h3>Redirecting to next launch page in {{ redirectTime }}.</h3>
       </div>
     </div>
   </div>
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       reported: false,
+      redirectTime: 0,
     };
   },
   mounted() {
@@ -36,9 +38,16 @@ export default {
       if (!this.reported) {
         this.$refs.desc.value = '';
         this.reported = true;
+        this.redirectTime = 5;
+        const started = Date.now();
+        const timer = setInterval(() => {
+          this.redirectTime = Math.ceil(5 - (Date.now() - started) / 1000);
+        }, 1000);
         setTimeout(() => {
           this.reported = false;
-        }, 2000);
+          clearInterval(timer);
+          this.$router.push('/');
+        }, 5000);
       }
     },
   },
@@ -71,7 +80,7 @@ export default {
   border: 0.1rem solid aliceblue;
   margin-left: 1rem;
   margin-right: 1rem;
-  background: black;
+  background: #333333;
   color: aliceblue;
   font-size: 2rem;
 }
@@ -89,6 +98,8 @@ export default {
 }
 .reported {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 .disabled {

@@ -3,14 +3,10 @@ import axios from 'axios';
 
 export default {
   async fetchRocketConfig(context, { id, name, url }) {
-    console.log('started fetchRocketConfig()');
     const findConfig = context.state.rocketConfigs.find(
       (config) => config.id === id || config.name === name
     );
     if (findConfig !== undefined) {
-      console.log(
-        'returned from fetchRocketConfig(), config has been already fetched'
-      );
       return;
     }
     context.commit('setLoadingState', { state: 'loading' });
@@ -23,8 +19,6 @@ export default {
       .catch((error) => {
         context.commit('setLoadingState', { state: 'error' });
         throw error;
-      })
-      .finally(console.log('finishedFetch'));
-    console.log('codeFetch');
+      });
   },
 };

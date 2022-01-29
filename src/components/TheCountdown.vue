@@ -65,21 +65,13 @@ export default {
     this.updateCountdown();
     this.setNextLaunchDate();
   },
-  unmounted() {
-    this.countdownInterval = null;
-  },
-  watch: {
-    start() {
-      clearInterval(this.countdownInterval);
-      this.countdownInterval = setInterval(this.updateCountdown, 1000);
-      this.updateCountdown();
-      this.setNextLaunchDate();
-    },
+  beforeUnmount() {
+    clearInterval(this.countdownInterval);
   },
   methods: {
     updateCountdown() {
       const countdown = getRemainingTime(this.start);
-      console.log('test');
+      console.log('timer');
       if (countdown.total <= 0) {
         clearInterval(this.countdownInterval);
         this.countdown.days = '00';

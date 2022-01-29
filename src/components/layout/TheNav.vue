@@ -29,7 +29,7 @@
         </router-link>
       </li>
       <li class="nav-footer">
-        <router-link to="bug">
+        <router-link to="/bug">
           <div class="link-text">
             <span class="link-title">Found a bug?</span>
             <span class="link-title">Click here!</span>
