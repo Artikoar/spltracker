@@ -91,7 +91,7 @@ export default {
       }
     },
     initMarkers() {
-      const pads = [];
+      const padsId = [];
       for (let launch of this.getUpcomingLaunches) {
         if (launch.pad.longitude && launch.pad.latitude) {
           if (
@@ -99,15 +99,40 @@ export default {
               (currentLaunch) => currentLaunch.pad.id === launch.pad.id
             ).length > 1
           ) {
-            pads.push(launch.pad.id);
+            padsId.push(launch.pad.id);
           } else {
-            this.setMarkerForPad(launch);
+            this.setMarkerForLaunch(launch);
           }
         }
       }
-      console.log(pads);
+      if (padsId.length > 0) {
+        for (let id of padsId) {
+          const padLaunches = this.getUpcomingLaunches.filter(
+            (launch) => id === launch.pad.id
+          );
+          this.setMarkerForPad(padLaunches);
+        }
+        console.log(padsId);
+      }
     },
-    setMarkerForPad(launch) {
+    setMarkerForPad(launches) {
+      const div = document.createElement('div');
+      launches.forEach((launch) => {
+        const h3 = document.createElement('h3');
+        h3.textContent = launch.name;
+        h3.classList.add('popup-map-class');
+        h3.addEventListener('click', () => {
+          this.$router.push(`/launch/${launch.id}`);
+        });
+        div.appendChild(h3);
+      });
+      const popup = new mapboxgl.Popup({ offset: 25 }).setDOMContent(div);
+      new mapboxgl.Marker({ color: 'red' })
+        .setLngLat([launches[0].pad.longitude, launches[0].pad.latitude])
+        .setPopup(popup)
+        .addTo(this.map);
+    },
+    setMarkerForLaunch(launch) {
       const div = document.createElement('div');
       const h3 = document.createElement('h3');
       h3.textContent = launch.name;

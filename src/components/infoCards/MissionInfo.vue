@@ -8,9 +8,13 @@
           <span>{{ mission.description }}</span>
         </div>
         <table class="data-values">
-          <tr>
+          <tr v-if="mission.type">
             <td>Type</td>
             <td>{{ mission.type }}</td>
+          </tr>
+          <tr v-if="mission.type">
+            <td>Orbit</td>
+            <td>{{ mission.orbit.abbrev }} | {{ mission.orbit.name }}</td>
           </tr>
         </table>
       </div>

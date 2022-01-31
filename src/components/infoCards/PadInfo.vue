@@ -151,7 +151,7 @@ export default {
   margin-top: 1rem;
   border-radius: 1rem;
   width: 100%;
-  height: 25vh;
+  min-height: 30vh;
 }
 .fly-to-btn {
   font-family: inherit;

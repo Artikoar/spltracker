@@ -19,9 +19,17 @@
             <span>{{ config.description }}</span>
           </div>
           <table class="data-values">
+            <tr v-if="config.manufacturer.name">
+              <td>Manufacturer</td>
+              <td>{{ config.manufacturer.name }}</td>
+            </tr>
             <tr v-if="config.launch_cost">
               <td>Launch cost</td>
               <td>{{ config.launch_cost }}$</td>
+            </tr>
+            <tr v-if="config.launch_mass">
+              <td>Launch mass</td>
+              <td>{{ config.launch_mass }}</td>
             </tr>
             <tr v-if="config.length">
               <td>Length</td>
@@ -30,6 +38,14 @@
             <tr v-if="config.diameter">
               <td>Diameter</td>
               <td>{{ config.diameter }}m</td>
+            </tr>
+            <tr v-if="config.gto_capacity">
+              <td>GTO capacity</td>
+              <td>{{ config.gto_capacity }}</td>
+            </tr>
+            <tr v-if="config.leo_capacity">
+              <td>LEO capacity</td>
+              <td>{{ config.leo_capacity }}</td>
             </tr>
           </table>
         </div>

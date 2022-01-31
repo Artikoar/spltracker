@@ -22,10 +22,16 @@
           <span class="link-title">Map</span>
         </router-link>
       </li>
-      <li>
-        <router-link to="/wiki">
-          <img src="@/assets/library_books_white_24dp.svg" alt="icon" />
-          <span class="link-title">Wiki</span>
+      <li class="info-mobile">
+        <router-link to="/wiki-mobile">
+          <img src="@/assets/atlas-solid.svg" alt="icon" />
+          <span class="link-title">Information</span>
+        </router-link>
+      </li>
+      <li class="info-desktop">
+        <router-link to="/wiki/astronauts">
+          <img src="@/assets/user-astronaut-solid.svg" alt="icon" />
+          <span class="link-title">Astronauts</span>
         </router-link>
       </li>
       <li class="nav-footer">
@@ -135,6 +141,9 @@ export default {};
   .nav-footer {
     display: none;
   }
+  .info-desktop {
+    display: none;
+  }
 }
 @media screen and (min-width: 600px) {
   .sidenav {
@@ -152,6 +161,9 @@ export default {};
     display: block;
     opacity: 1;
     color: aliceblue;
+  }
+  .info-mobile {
+    display: none;
   }
 }
 </style>
