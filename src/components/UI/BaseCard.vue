@@ -22,8 +22,17 @@
 <script>
 export default {};
 </script>
-
 <style>
+a {
+  color: gray;
+  text-decoration: wavy solid white;
+}
+a:hover {
+  color: #cccccc;
+  text-decoration: underline solid;
+}
+</style>
+<style scoped>
 .container {
   padding: 1rem;
   height: 100%;
@@ -51,13 +60,5 @@ export default {};
 }
 .content {
   overflow-wrap: break-word;
-}
-a {
-  color: gray;
-  text-decoration: wavy white;
-}
-a:hover {
-  color: #cccccc;
-  text-decoration: underline solid;
 }
 </style>

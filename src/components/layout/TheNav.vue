@@ -11,8 +11,8 @@
         <router-link to="/">
           <img src="@/assets/bx-timer.svg" alt="icon" />
           <div class="link-text">
-            <span class="link-title">Next Launch</span>
-            <span class="link-title">Countdown</span>
+            <span class="link-title">Upcoming</span>
+            <span class="link-title">Launch</span>
           </div>
         </router-link>
       </li>
@@ -35,6 +35,12 @@
         </router-link>
       </li>
       <li class="nav-footer">
+        <a href="https://github.com/Artikoar/spltracker" target="_blank">
+          <div class="link-text">
+            <span class="link-title">See this project</span>
+            <span class="link-title">on Github.</span>
+          </div>
+        </a>
         <router-link to="/bug">
           <div class="link-text">
             <span class="link-title">Found a bug?</span>
@@ -59,6 +65,9 @@ export default {};
   background: #333333;
   transition: 0.2s ease;
   z-index: 1;
+}
+.router-link-exact-active {
+  background: #222222;
 }
 .nav-links {
   list-style: none;

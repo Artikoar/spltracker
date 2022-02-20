@@ -83,7 +83,7 @@ export default {
   },
   async mounted() {
     mapboxgl.accessToken =
-      'pk.eyJ1IjoiYXJ0aWtvYXIiLCJhIjoiY2t5Z2NmenVpMHdqdTMwcXA4Y3psc3BvbiJ9.jIgq67pGbzSkdCh12tsTPA';
+      process.env.VUE_APP_MAPBOX_TOKEN;
     if (this.$refs.mapBox) {
       this.map = await new mapboxgl.Map({
         container: this.$refs.mapBox,

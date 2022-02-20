@@ -1,6 +1,6 @@
-# final
+# SPLTracker
 
-## Project setup
+### Project setup
 ```
 npm install
 ```

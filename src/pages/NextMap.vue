@@ -38,7 +38,10 @@
           </div>
         </div>
       </div>
-      <div ref="mapBox" class="mapBox"></div>
+      <div class="mapArea">
+        <div ref="mapBox" class="mapBox"></div>
+        <map-details opened="true" class="mapDetails"></map-details>
+      </div>
     </div>
   </div>
   <div v-if="launchesAreLoading === 'error'">
@@ -50,17 +53,28 @@
 </template>
 
 <script>
+require('dotenv').config();
 import { mapActions, mapGetters } from 'vuex';
 import months from '../utils/months';
 import mapboxgl from 'mapbox-gl';
+import MapDetails from '@/components/MapDetails.vue';
 
 export default {
+  components: {
+    MapDetails,
+  },
   data() {
     return {
       months: months,
       map: null,
       padsMarkers: [],
       mapStyle: 'mapbox://styles/mapbox/streets-v11',
+      providedFunctions: { map: null },
+    };
+  },
+  provide() {
+    return {
+      providedFunctions: this.providedFunctions,
     };
   },
   async created() {
@@ -70,8 +84,7 @@ export default {
   methods: {
     ...mapActions('launches', ['fetchUpcomingLaunches']),
     async initMap() {
-      mapboxgl.accessToken =
-        'pk.eyJ1IjoiYXJ0aWtvYXIiLCJhIjoiY2t5Z2NmenVpMHdqdTMwcXA4Y3psc3BvbiJ9.jIgq67pGbzSkdCh12tsTPA';
+      mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_TOKEN;
       if (this.$refs.mapBox) {
         this.map = await new mapboxgl.Map({
           container: this.$refs.mapBox,
@@ -164,6 +177,13 @@ export default {
     mapStyle() {
       this.map.setStyle(this.mapStyle);
     },
+    map() {
+      if (this.map) {
+        this.providedFunctions.map = this.map;
+      } else {
+        this.providedFunctions.map = null;
+      }
+    },
   },
 };
 </script>
@@ -179,6 +199,16 @@ export default {
 }
 </style>
 <style scoped>
+.mapArea {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.mapDetails {
+  position: absolute;
+  right: 0;
+}
 .wrapper {
   position: absolute;
   top: 0;
@@ -211,7 +241,6 @@ export default {
   border-radius: 0rem 0rem 2rem 2rem;
 }
 .mapBox {
-  position: absolute;
   width: 100%;
   height: 100%;
 }
@@ -244,6 +273,9 @@ export default {
   .mpControl {
     width: 100%;
     border-radius: 0rem;
+  }
+  .mapDetails {
+    display: none;
   }
 }
 @media screen and (min-width: 600px) {
